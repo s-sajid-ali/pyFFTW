@@ -46,6 +46,7 @@ Contents
    :maxdepth: 2
 
    /sphinx/tutorial
+   /sphinx/tutorial_mpi
    /sphinx/api
 
 Indices and tables

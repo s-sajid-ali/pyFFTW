@@ -23,9 +23,19 @@ from .pyfftw import (
         n_byte_align,
         is_n_byte_aligned,)
 
+try:
+    from .pyfftw import (
+        FFTW_MPI,
+        broadcast_wisdom,
+        create_mpi_plan,
+        gather_wisdom,
+        local_size,
+        supported_mpi_types)
+except ImportError:
+    pass
+
 from . import builders
 from . import interfaces
 
 # clean up the namespace
 del builders.builders
-
