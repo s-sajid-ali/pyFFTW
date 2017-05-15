@@ -1,4 +1,4 @@
-# Copyright 2017 Henry Gomersall and the PyFFTW contributors
+# Copyright 2018 Henry Gomersall and the PyFFTW contributors
 #
 # Henry Gomersall
 # heng@kedevelopments.co.uk
@@ -218,9 +218,7 @@ class EnvironmentSniffer(object):
             raise CompileError("Could not find the FFTW header 'fftw3.h'")
 
         # mpi is optional
-        # self.support_mpi = self.has_header(['mpi.h', 'fftw3-mpi.h'])
-        # TODO enable check when wrappers are included in Pyfftw
-        self.support_mpi = False
+        self.support_mpi = self.has_header(['mpi.h', 'fftw3-mpi.h'])
 
         if self.support_mpi:
             try:
@@ -300,6 +298,8 @@ class EnvironmentSniffer(object):
             for d in data_types:
                 if self.compile_time_env['HAVE_' + d + '_MPI']:
                     found_mpi_types.append(d)
+            if len(found_mpi_types) > 0:
+                self.compile_time_env['HAVE_MPI'] = True
         else:
             self.compile_time_env['HAVE_MPI'] = False
 

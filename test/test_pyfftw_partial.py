@@ -3,7 +3,7 @@
 # Henry Gomersall
 # heng@kedevelopments.co.uk
 # Frederik Beaujean
-# Frederik.Beaujean@lmu.de
+# beaujean@mpp.mpg.de
 #
 # All rights reserved.
 #

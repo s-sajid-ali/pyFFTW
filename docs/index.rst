@@ -47,6 +47,7 @@ Contents
 
    /source/tutorial
    /source/api
+   /source/tutorial_mpi
 
 Indices and tables
 ==================

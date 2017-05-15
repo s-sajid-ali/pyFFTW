@@ -1772,6 +1772,9 @@ cdef class FFTW:
         with nogil:
             fftw_execute(plan, input_pointer, output_pointer)
 
+IF HAVE_MPI:
+    include 'mpi.pxi'
+
 cdef void count_char(char c, void *counter_ptr):
     '''
     On every call, increment the derefenced counter_ptr.
