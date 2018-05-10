@@ -23,7 +23,7 @@ python:
 
 branches:
     only:
-        - mpi-pr-changes
+        - mpi-pr-new
 
 before_install:
   - eval "${MATRIX_EVAL}"
