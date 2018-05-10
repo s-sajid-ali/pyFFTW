@@ -1,64 +1,64 @@
 language: python
- 
+
 os: linux
 sudo : false
 matrix:
-  include:
-    - os: linux
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-7
-            - gfortran-7
-      env:
-         - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7 && F77=gfortran-7"
- 
+ include:
+   - os: linux
+     addons:
+       apt:
+         sources:
+           - ubuntu-toolchain-r-test
+         packages:
+           - g++-7
+           - gfortran-7
+     env:
+        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7 && F77=gfortran-7"
+
 compiler:
-  - gcc
- 
+ - gcc
+
 python:
-  - 3.6
- 
+ - 3.6
+
 branches:
-    only:
-        - mpi-pr-new
- 
+   only:
+       - mpi-pr-new
+
 before_install:
-  - eval "${MATRIX_EVAL}"
-  - echo $(pwd)
-  - git clone -b develop https://github.com/spack/spack/
-  - spack/bin/spack compiler find
-  - spack/bin/spack compilers
-  - cat ~/.spack/linux/compilers.yaml
-  - spack/bin/spack bootstrap
-  - . spack/share/spack/setup-env.sh
-  - travis_wait 40 spack install mpich %gcc@7.3.0
-  - travis_wait 40 spack install fftw+mpi simd=avx ^mpich  %gcc@7.3.0
-  - spack load mpich
-  - spack load fftw
-  - wget https://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh
-  - bash miniconda.sh -b -p $HOME/miniconda
-  - export PATH="$HOME/miniconda/bin:$PATH"
-  - hash -r
-  - conda config --set always_yes yes --set changeps1 no
-  - conda update -q conda
-  - conda info -a
- 
+ - eval "${MATRIX_EVAL}"
+ - echo $(pwd)
+ - git clone -b develop https://github.com/spack/spack/
+ - spack/bin/spack compiler find
+ - spack/bin/spack compilers
+ - cat ~/.spack/linux/compilers.yaml
+ - spack/bin/spack bootstrap
+ - . spack/share/spack/setup-env.sh
+ - travis_wait 40 spack install mpich %gcc@7.3.0
+ - travis_wait 40 spack install fftw+mpi simd=avx ^mpich  %gcc@7.3.0
+ - spack load mpich
+ - spack load fftw
+ - wget https://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh
+ - bash miniconda.sh -b -p $HOME/miniconda
+ - export PATH="$HOME/miniconda/bin:$PATH"
+ - hash -r
+ - conda config --set always_yes yes --set changeps1 no
+ - conda update -q conda
+ - conda info -a
+
 install:
-  - conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION nomkl numpy scipy cython setuptools
-  - conda install -q -n test-environment dask=0.15.0 || true
-  - source activate test-environment
-  - conda install pip
-  - pip install codecov
-  - pip install mpi4py
-  - test -n $CC && unset CC
-  - CC=mpicc LDSHARED='mpicc -shared' python setup.py build_ext --inplace
-  - pip install --user -e .
- 
+ - conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION nomkl numpy scipy cython setuptools
+ - conda install -q -n test-environment dask=0.15.0 || true
+ - source activate test-environment
+ - conda install pip
+ - pip install codecov
+ - pip install mpi4py
+ - test -n $CC && unset CC
+ - CC=mpicc LDSHARED='mpicc -shared' python setup.py build_ext --inplace
+ - pip install --user -e .
+
 script:
-  - travis_wait 50 mpirun coverage -np 2 run test/test_pyfftw_mpi.py
- 
+ - travis_wait 50 mpirun coverage -np 2 run test/test_pyfftw_mpi.py
+
 after_success:
 codecov
