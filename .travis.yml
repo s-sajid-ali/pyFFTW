@@ -63,4 +63,5 @@ script:
   - travis_wait 50 mpirun -np 2 coverage run test_pyfftw_mpi.py
 
 after_success:
+  - codecov
   - bash <(curl -s https://codecov.io/bash) -t e32acc48-7ab3-493b-97bf-934bb1874f73
