@@ -59,7 +59,7 @@ install:
   - pip install --user -e .
 
 script:
-  - cp tests/test_pyfftw_mpi.py .
+  - cp tests/test_pyfftw_mpi.py ~/
   - travis_wait 50 mpirun -np 2 coverage run test_pyfftw_mpi.py
 
 after_success:
