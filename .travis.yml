@@ -51,6 +51,7 @@ install:
   - conda install -q -n test-environment dask=0.15.0 || true
   - source activate test-environment
   - conda install pip
+  - pip install --upgrade pip
   - pip install codecov
   - pip install mpi4py
   - test -n $CC && unset CC
