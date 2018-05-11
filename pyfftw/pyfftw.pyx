@@ -1,3 +1,5 @@
+# cython: linetrace=True
+# distutils: define_macros=CYTHON_TRACE=1
 # Copyright 2015 Knowledge Economy Developments Ltd
 #
 # Henry Gomersall
