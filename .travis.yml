@@ -35,7 +35,6 @@ before_install:
   - spack/bin/spack bootstrap
   - . spack/share/spack/setup-env.sh
   - travis_wait 40 spack install fftw~mpi simd=avx  %gcc@7.3.0
-  - spack load mpich
   - spack load fftw
   - wget https://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh
   - bash miniconda.sh -b -p $HOME/miniconda
