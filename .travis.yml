@@ -51,7 +51,6 @@ install:
   - conda install -c conda-forge codecov 
   - conda install pip
   - pip install --upgrade pip
-  - pip install mpi4py
   - test -n $CC && unset CC
   - python setup.py build_ext --inplace 
   - pip install --user -e .
