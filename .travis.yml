@@ -57,7 +57,7 @@ install:
 
 script:
   - cp /home/travis/build/s-sajid-ali/pyFFTW/test/*.py .
-  - echo $(ls)
+  - echo $(ls | grep test_*)
   - |
     for i in $(ls | grep test_*)
     do
@@ -65,7 +65,6 @@ script:
        coverage run $i
     done
   - coverage combine
-  - sh test.sh 
 
 after_success:
   - export CODECOV_TOKEN="e32acc48-7ab3-493b-97bf-934bb1874f73"
