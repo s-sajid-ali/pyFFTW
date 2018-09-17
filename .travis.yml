@@ -57,15 +57,15 @@ install:
 
 script:
   - cp /home/travis/build/s-sajid-ali/pyFFTW/test/*.py .
-  - echo $(ls | grep test_*)
+  - echo $"ls | grep test_*"
   - |
-    for i in "$ls"
+    for i in $ls
     do
       if $i == test_*
-      do
+      then
         echo $i
         coverage run $i
-      done
+      fi
     done
   - coverage combine
 
