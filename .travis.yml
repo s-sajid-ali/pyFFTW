@@ -61,7 +61,7 @@ script:
   - |
     for i in $ls
     do
-      if $i == test_*
+      if [ $i == test_* ]
       then
         echo $i
         coverage run $i
