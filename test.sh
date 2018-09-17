@@ -1,3 +1,3 @@
-for i in $(ls $HOME/test/ | grep test_*); do
+for i in $(ls $pwd/test/ | grep test_*); do
   coverage run i
 done    
