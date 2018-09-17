@@ -59,7 +59,8 @@ script:
   - cp /home/travis/build/s-sajid-ali/pyFFTW/test/*.py .
   - echo $(ls)
   - |
-    for i in $(ls | grep test_*); do
+    for i in $(ls | grep test_*)
+    do
        echo $i
        coverage run $i
     done
