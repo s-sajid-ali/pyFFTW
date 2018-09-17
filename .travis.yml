@@ -56,7 +56,15 @@ install:
   - pip install --user -e .
 
 script:
-  - cp /home/travis/build/s-sajid-ali/pyFFTW/test/* .
+  - cp /home/travis/build/s-sajid-ali/pyFFTW/test/*.py .
+  - cp /test/* .
+  - echo $(ls)
+  - |
+    for i in $(ls | grep test_*); do
+       echo $i
+       coverage run $i
+    done
+  - coverage combine
   - sh test.sh 
 
 after_success:
