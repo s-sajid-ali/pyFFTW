@@ -56,7 +56,8 @@ install:
   - pip install --user -e .
 
 script:
-  - bash test.sh 
+  - cp /home/travis/build/s-sajid-ali/pyFFTW/test/* .
+  - sh test.sh 
 
 after_success:
   - export CODECOV_TOKEN="e32acc48-7ab3-493b-97bf-934bb1874f73"
