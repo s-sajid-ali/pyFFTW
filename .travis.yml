@@ -43,6 +43,6 @@ install:
   
   
 script:
-  - coverage run test/test_pyfftw_base.py
+  - test.sh
   - coverage xml
   - codecov
