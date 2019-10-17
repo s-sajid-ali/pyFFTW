@@ -1,3 +1,4 @@
+cd test/
 for i in $(ls | grep test_*)
 do
 	echo $i
