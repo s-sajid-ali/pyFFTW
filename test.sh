@@ -4,6 +4,6 @@ do
 	echo $i
 	coverage run $i
 done
-converage setup.py test
+coverage setup.py test
 coverage combine
 
