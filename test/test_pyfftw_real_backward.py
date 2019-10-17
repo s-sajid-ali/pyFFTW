@@ -38,7 +38,7 @@ import numpy
 from timeit import Timer
 import time
 
-from .test_pyfftw_base import run_test_suites, miss, require, np_fft
+from test_pyfftw_base import run_test_suites, miss, require, np_fft
 
 import unittest
 
