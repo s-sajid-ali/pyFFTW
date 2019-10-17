@@ -4,6 +4,7 @@ do
 	echo $i
 	coverage run $i
 done
-coverage setup.py test
+cd ../
+coverage run setup.py test
 coverage combine
 
