@@ -46,9 +46,9 @@ try:
 except ImportError:
     pass
 
-from test_pyfftw_base import run_test_suites
+fromtest_pyfftw_base import run_test_suites
 from .test_pyfftw_numpy_interface import complex_dtypes, real_dtypes
-from ._get_default_args import get_default_args
+from _get_default_args import get_default_args
 
 from distutils.version import LooseVersion
 import unittest

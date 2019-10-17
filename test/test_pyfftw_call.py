@@ -36,7 +36,7 @@
 from pyfftw import (
         FFTW, empty_aligned, byte_align)
 
-from test_pyfftw_base import run_test_suites, miss, require
+fromtest_pyfftw_base import run_test_suites, miss, require
 import numpy
 import unittest
 

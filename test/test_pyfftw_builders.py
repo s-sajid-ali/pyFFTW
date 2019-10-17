@@ -35,8 +35,8 @@
 from pyfftw import builders, empty_aligned, byte_align, FFTW
 from pyfftw import _supported_nptypes_complex, _supported_nptypes_real
 from pyfftw.builders import _utils as utils
-from test_pyfftw_base import run_test_suites, require
-from ._get_default_args import get_default_args
+fromtest_pyfftw_base import run_test_suites, require
+from _get_default_args import get_default_args
 
 import unittest
 import numpy
@@ -1179,7 +1179,7 @@ class BuildersTestUtilities(unittest.TestCase):
             self.assertRaisesRegex(IndexError, 'Invalid axes',
                     utils._compute_array_shapes, *args)
 
-    def _call_cook_nd_args(self, arg_tuple):
+    def _cal_cook_nd_args(self, arg_tuple):
         a = numpy.zeros(arg_tuple[0])
         args = ('s', 'axes', 'invreal')
         arg_dict = {'a': a}
@@ -1187,9 +1187,9 @@ class BuildersTestUtilities(unittest.TestCase):
             if arg is not None:
                 arg_dict[arg_name] = arg
 
-        return utils._cook_nd_args(**arg_dict)
+        return utils_cook_nd_args(**arg_dict)
 
-    def test_cook_nd_args_normal(self):
+    def tes_cook_nd_args_normal(self):
         # inputs are (a.shape, s, axes, invreal)
         # None corresponds to no argument
         inputs = (
@@ -1214,10 +1214,10 @@ class BuildersTestUtilities(unittest.TestCase):
                 )
 
         for each_input, each_output in zip(inputs, outputs):
-            self.assertEqual(self._call_cook_nd_args(each_input),
+            self.assertEqual(self._cal_cook_nd_args(each_input),
                     each_output)
 
-    def test_cook_nd_args_invreal(self):
+    def tes_cook_nd_args_invreal(self):
 
         # inputs are (a.shape, s, axes, invreal)
         # None corresponds to no argument
@@ -1243,11 +1243,11 @@ class BuildersTestUtilities(unittest.TestCase):
                 )
 
         for each_input, each_output in zip(inputs, outputs):
-            self.assertEqual(self._call_cook_nd_args(each_input),
+            self.assertEqual(self._cal_cook_nd_args(each_input),
                     each_output)
 
 
-    def test_cook_nd_args_invalid_inputs(self):
+    def tes_cook_nd_args_invalid_inputs(self):
         # inputs are (a.shape, s, axes, invreal)
         # None corresponds to no argument
         inputs = (
@@ -1258,7 +1258,7 @@ class BuildersTestUtilities(unittest.TestCase):
         # all the inputs should yield an error
         for each_input in inputs:
             self.assertRaisesRegex(ValueError, 'Shape error',
-                    self._call_cook_nd_args, *(each_input,))
+                    self._cal_cook_nd_args, *(each_input,))
 
 test_cases = (
         BuildersTestFFTWWrapper,

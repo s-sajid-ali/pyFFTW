@@ -34,8 +34,8 @@
 
 from pyfftw import interfaces, _supported_types, _all_types_np
 
-from test_pyfftw_base import run_test_suites, np_fft
-from ._get_default_args import get_default_args
+fromtest_pyfftw_base import run_test_suites, np_fft
+from _get_default_args import get_default_args
 
 from distutils.version import LooseVersion
 import unittest
@@ -45,9 +45,9 @@ import copy
 warnings.filterwarnings('always')
 
 if LooseVersion(numpy.version.version) <= LooseVersion('1.6.2'):
-    # We overwrite the broken _cook_nd_args with a fixed version.
-    from ._cook_nd_args import _cook_nd_args
-    numpy.fft.fftpack._cook_nd_args = _cook_nd_args
+    # We overwrite the broken_cook_nd_args with a fixed version.
+    from _cook_nd_args import_cook_nd_args
+    numpy.fft.fftpack_cook_nd_args =_cook_nd_args
 
 complex_dtypes = []
 real_dtypes = []
@@ -100,7 +100,7 @@ if _numpy_fft_has_norm_kwarg() and numpy.__version__ < '1.13':
 
     def rfftn_fix(a, s=None, axes=None, norm=None):
         a = numpy.array(a, copy=True, dtype=float)
-        s, axes = fftpk._cook_nd_args(a, s, axes)
+        s, axes = fftpk_cook_nd_args(a, s, axes)
         a = rfft_fix(a, s[-1], axes[-1], norm)
         for ii in range(len(axes)-1):
             a = fftpk.fft(a, s[ii], axes[ii], norm)

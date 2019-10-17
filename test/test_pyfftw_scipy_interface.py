@@ -48,7 +48,7 @@ else:
     scipy_missing = False
 
 import unittest
-from test_pyfftw_base import run_test_suites, miss
+fromtest_pyfftw_base import run_test_suites, miss
 from . import test_pyfftw_numpy_interface
 
 '''pyfftw.interfaces.scipy_fftpack just wraps pyfftw.interfaces.numpy_fft.

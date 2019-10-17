@@ -33,7 +33,7 @@
 #
 
 
-from test_pyfftw_base import run_test_suites
+fromtest_pyfftw_base import run_test_suites
 
 import unittest
 import pyfftw

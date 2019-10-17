@@ -32,13 +32,13 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
-# A module containing the latest version of _cook_nd_args from
+# A module containing the latest version of_cook_nd_args from
 # numpy.fft.fftpack. It can be used to overwrite an earlier
 # broken version in the tests.
 
 from numpy.core import take
 
-def _cook_nd_args(a, s=None, axes=None, invreal=0):
+def_cook_nd_args(a, s=None, axes=None, invreal=0):
     if s is None:
         shapeless = 1
         if axes is None:

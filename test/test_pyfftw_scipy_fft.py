@@ -47,7 +47,7 @@ if has_scipy_fft:
     from pyfftw.interfaces import scipy_fft
 
 import unittest
-from test_pyfftw_base import run_test_suites, miss
+fromtest_pyfftw_base import run_test_suites, miss
 from . import test_pyfftw_numpy_interface
 
 '''pyfftw.interfaces.scipy_fft just wraps pyfftw.interfaces.numpy_fft.
