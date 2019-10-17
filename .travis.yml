@@ -43,6 +43,6 @@ install:
   
   
 script:
-  - test.sh
+  - sh test.sh
   - coverage xml
   - codecov
