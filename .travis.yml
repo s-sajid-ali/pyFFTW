@@ -1,65 +1,43 @@
 language: python
 
-os: linux
-sudo : false
-matrix:
-  include:
-    - os: linux
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-7
-            - gfortran-7
-      env:
-         - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7 && F77=gfortran-7"
-
-compiler:
-  - gcc
+sudo: false
 
 python:
   - 3.6
 
-branches:
-    only:
-        - master_cov
+addons:
+  apt:
+    packages:
+        libfftw3-dev
 
 before_install:
-  - eval "${MATRIX_EVAL}"
-  - echo $(pwd)
-  - git clone -b develop https://github.com/spack/spack/
-  - spack/bin/spack compiler find
-  - spack/bin/spack compilers
-  - cat ~/.spack/linux/compilers.yaml
-  - spack/bin/spack bootstrap
-  - . spack/share/spack/setup-env.sh
-  - travis_wait 40 spack install fftw~mpi simd=avx  %gcc@7.3.0
-  - spack load fftw
-  - wget https://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh
+  - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
   - bash miniconda.sh -b -p $HOME/miniconda
   - export PATH="$HOME/miniconda/bin:$PATH"
   - hash -r
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
-  - conda info -a
+  - conda info -a 
 
 install:
-  - conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION nomkl numpy scipy cython setuptools
+  - conda create -q -n test-environment python=3.6 nomkl numpy setuptools
   - conda install -q -n test-environment dask=0.15.0 || true
-  - source activate test-environment
-  - conda install -c conda-forge codecov 
-  - conda install pip
-  - pip install --upgrade pip
-  - test -n $CC && unset CC
-  - python setup.py build_ext --inplace 
-  - pip install --user -e .
-
+  - |
+    if [ -z "$SCIPY_WHEELS" ]; then
+      conda install -q -n test-environment scipy
+      source activate test-environment
+    else
+      source activate test-environment
+      pip install --pre --upgrade --timeout=60 -f "$SCIPY_WHEELS" scipy
+    fi
+  - pip install codecov
+  - pip install cython
+  - pip install coverage
+  - python setup.py -v build_ext --define CYTHON_TRACE
+  - python setup.py -v install
+  - cython --annotate-coverage coverage.xml --compile-time-env 'HAVE_DOUBLE'=True --compile-time-env 'HAVE_DOUBLE_OMP'=True --compile-time-env 'HAVE_DOUBLE_THREADS'=True --compile-time-env 'HAVE_DOUBLE_MULTITHREADING'=True --compile-time-env 'HAVE_DOUBLE_MPI'=True --compile-time-env 'HAVE_SINGLE'=True --compile-time-env 'HAVE_SINGLE_OMP'=True --compile-time-env 'HAVE_SINGLE_THREADS'=True --compile-time-env 'HAVE_SINGLE_MULTITHREADING'=True --compile-time-env 'HAVE_SINGLE_MPI'=True --compile-time-env 'HAVE_LONG'=True --compile-time-env 'HAVE_LONG_OMP'=True --compile-time-env 'HAVE_LONG_THREADS'=True --compile-time-env 'HAVE_LONG_MULTITHREADING'=True --compile-time-env 'HAVE_LONG_MPI'=True --compile-time-env 'HAVE_MPI'=False pyfftw/pyfftw.pyx
+  
 script:
-  - cp /home/travis/build/s-sajid-ali/pyFFTW/test/*.py .
-  - echo $(ls | grep test_*)
-  - sh test.sh
-
-after_success:
-  - export CODECOV_TOKEN="e32acc48-7ab3-493b-97bf-934bb1874f73"
+  - coverage run test/test_pyfftw_base.py
+  - coverage xml
   - codecov
