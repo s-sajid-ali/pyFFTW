@@ -37,7 +37,7 @@ from pyfftw import (
         export_wisdom, import_wisdom, forget_wisdom,
         _supported_types, _supported_nptypes_complex)
 
-fromtest_pyfftw_base import run_test_suites
+from test_pyfftw_base import run_test_suites
 
 import numpy
 import pickle
