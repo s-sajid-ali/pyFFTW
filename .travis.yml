@@ -40,4 +40,7 @@ install:
 
 script:
   - coverage run setup.py test
-  - travis/partial.sh
+  - coverage combine
+  - coverage xml
+  - codecov
+  
