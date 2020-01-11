@@ -42,6 +42,6 @@ install:
  
   
 script:
-  - coverage setup.py test
+  - coverage run setup.py test
   - coverage xml
   - codecov
