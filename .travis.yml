@@ -40,7 +40,6 @@ install:
 
 script:
   - coverage run setup.py test
-  - coverage combine
   - coverage xml
   - codecov
   
