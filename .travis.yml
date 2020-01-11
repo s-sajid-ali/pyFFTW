@@ -28,6 +28,9 @@ install:
       source activate test-environment
       pip install --pre --upgrade --timeout=60 -f "$SCIPY_WHEELS" scipy
     fi
+  - pip install cython
+  - pip install coverage
+  - pip install codecov
   - python setup.py -v build_ext --inplace
 
 script:
