@@ -36,7 +36,7 @@ from pyfftw import FFTW
 import numpy
 from timeit import Timer
 
-fromtest_pyfftw_base import run_test_suites, miss, np_fft
+from test_pyfftw_base import run_test_suites, miss, np_fft
 
 import unittest
 
