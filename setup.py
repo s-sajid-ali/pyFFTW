@@ -37,7 +37,7 @@ try:
     # use setuptools if we can
     from setuptools import setup, Command
     #from setuptools.command.build_ext import build_ext
-    from Cython.Build import build_ext
+    import Cython.Build.new_build_ext as buid_ext
     from Cython.Build import cythonize
     using_setuptools = True
 except ImportError:
@@ -615,7 +615,7 @@ class custom_build_ext(build_ext):
         # read out information and modify compiler
 
         # define macros, that is which part of wrapper is built
-        self.compile_time_env = sniffer.compile_time_env
+        self.cython_compile_time_env = sniffer.compile_time_env
 
         # call `extend()` to keep argument set neither by sniffer nor by
         # user. On windows there are includes set automatically, we
