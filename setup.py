@@ -36,7 +36,9 @@
 try:
     # use setuptools if we can
     from setuptools import setup, Command
-    from setuptools.command.build_ext import build_ext
+    #from setuptools.command.build_ext import build_ext
+    from Cython.Build import build_ext
+    from Cython.Build import cythonize
     using_setuptools = True
 except ImportError:
     from distutils.core import setup, Command
@@ -557,8 +559,9 @@ def make_sniffer(compiler):
         return StaticSniffer(compiler)
 
 def get_extensions():
-    ext_modules = [Extension('pyfftw.pyfftw',
-                             sources=[os.path.join('pyfftw', 'pyfftw.pyx')])]
+    ext_modules = cythonize([Extension('pyfftw.pyfftw', sources=[os.path.join('pyfftw', 'pyfftw.pyx')])], compiler_directives={'linetrace': True,'language_level': 3}),
+    
+    
     return ext_modules
 
 
