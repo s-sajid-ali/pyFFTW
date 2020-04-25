@@ -559,7 +559,7 @@ def make_sniffer(compiler):
         return StaticSniffer(compiler)
 
 def get_extensions():
-    ext_modules = cythonize([Extension('pyfftw.pyfftw', sources=[os.path.join('pyfftw', 'pyfftw.pyx')])], compiler_directives={'linetrace': True,'language_level': 3},   compile_time_env={'HAVE_DOUBLE':True, 'HAVE_DOUBLE_OMP':True, 'HAVE_DOUBLE_THREADS':True, 'HAVE_DOUBLE_MULTITHREADING':True, 'HAVE_DOUBLE_MPI':True,'HAVE_SINGLE':True, 'HAVE_SINGLE_OMP':True, 'HAVE_SINGLE_THREADS':True, 'HAVE_SINGLE_MULTITHREADING':True, 'HAVE_SINGLE_MPI':True,'HAVE_LONG':True, 'HAVE_LONG_OMP':True, 'HAVE_LONG_THREADS':True, 'HAVE_LONG_MULTITHREADING':True, HAVE_LONG_MPI':True, 'HAVE_MPI':False})
+    ext_modules = cythonize([Extension('pyfftw.pyfftw', sources=[os.path.join('pyfftw', 'pyfftw.pyx')])], compiler_directives={'linetrace': True,'language_level': 3})
     
     return ext_modules
 
@@ -615,7 +615,7 @@ class custom_build_ext(build_ext):
         # read out information and modify compiler
 
         # define macros, that is which part of wrapper is built
-        self.cython_compile_time_env = sniffer.compile_time_env
+        self.compile_time_env = sniffer.compile_time_env
 
         # call `extend()` to keep argument set neither by sniffer nor by
         # user. On windows there are includes set automatically, we
