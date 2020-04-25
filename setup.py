@@ -35,13 +35,12 @@
 # import only from standard library so dependencies can be installed
 from Cython.Distutils.build_ext import new_build_ext
 build_ext = new_build_ext
-from Cython.Build import cythonize
 
 
 try:
     # use setuptools if we can
     from setuptools import setup, Command
-    from setuptools.command.build_ext import build_ext
+    #from setuptools.command.build_ext import build_ext
     using_setuptools = True
 except ImportError:
     from distutils.core import setup, Command
