@@ -33,12 +33,15 @@
 #
 
 # import only from standard library so dependencies can be installed
+from Cython.Distutils.build_ext import new_build_ext
+build_ext = new_build_ext
+from Cython.Build import cythonize
+
+
 try:
     # use setuptools if we can
     from setuptools import setup, Command
-    #from setuptools.command.build_ext import build_ext
-    import Cython.Build.new_build_ext as buid_ext
-    from Cython.Build import cythonize
+    from setuptools.command.build_ext import build_ext
     using_setuptools = True
 except ImportError:
     from distutils.core import setup, Command
@@ -559,7 +562,7 @@ def make_sniffer(compiler):
         return StaticSniffer(compiler)
 
 def get_extensions():
-    ext_modules = cythonize([Extension('pyfftw.pyfftw', sources=[os.path.join('pyfftw', 'pyfftw.pyx')])], compiler_directives={'linetrace': True,'language_level': 3})
+    ext_modules = [Extension('pyfftw.pyfftw', sources=[os.path.join('pyfftw', 'pyfftw.pyx')])]
     
     return ext_modules
 
