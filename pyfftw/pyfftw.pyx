@@ -1,4 +1,4 @@
-# cython: language_level=3str
+# cython: language_level=3, linetrace=True, lineprofile=True
 #
 # Copyright 2015 Knowledge Economy Developments Ltd
 #

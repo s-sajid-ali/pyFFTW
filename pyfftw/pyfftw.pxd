@@ -1,3 +1,5 @@
+# cython: language_level=3, linetrace=True, lineprofile=True
+#
 # Copyright 2014 Knowledge Economy Developments Ltd
 #
 # Henry Gomersall
